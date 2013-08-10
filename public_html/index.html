@@ -21,10 +21,45 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+        <h1>Tweet your Science CSV formatter</h1>
+        <div class="tys-form-csv">
+            <form id='tys-form' action="">
+                <label for="tys-form-data">Paste csv formatted data in here:</label>
+                <textarea name="tys-csv-raw" id="tys-form-data" cols="30" rows="10" class="tys-form-data"></textarea>
+                <input type="submit" />
+            </form>
+        </div>
+        <div data-js="tys-list-target">
 
+        </div>
+        <script id="tys-template-list" type="text/template">
+            {{! Template for list - edit below to change the list output
+                see https://github.com/janl/mustache.js for syntax
+            }}}
+            <ul>
+                {{#.}} {{! loop through the list }}
+                    <li>
+                        <div class= "feature">
+                            <h3>{{ Name }}</h3>
+                            <p><strong>Location:</strong>{{ Location }}</p>
+                            <p><strong>Institution:</strong>{{ Institution }}</p>
+                            <p><strong>Department/Field:</strong>{{ Field }}</p>
+                            <p><strong>Research Interests:</strong>{{ Research Interests }}</p>
+                            {{#Twitter}}
+                            <p><strong>Twitter:</strong><a href= "https://twitter.com/{{ Twitter }}">@{{ Twitter }}</a></p>
+                            {{/Twitter}}
+                            {{#Website }}
+                            <p><strong>Website:</strong><a href="http://{{ Website }}">http://{{ Website }}</a></p>
+                            {{/Website}}
+                        </div>
+                    </li>
+                {{/.}} {{! end loop }}
+            </ul>
+        </script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
+        <script src="js/vendor/csv.js"></script>
+        <script src="js/vendor/mustache.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 
