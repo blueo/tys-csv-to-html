@@ -14,6 +14,7 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/prism.css"/>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -24,14 +25,23 @@
         <h1>Tweet your Science CSV to HTML formatter</h1>
         <div class="tys-form-csv">
             <form id='tys-form' action="">
-                <label for="tys-form-data">Paste csv formatted data in here:</label>
-                <textarea name="tys-csv-raw" id="tys-form-data" cols="30" rows="10" class="tys-form-data"></textarea>
-                <input type="submit" />
+                <label for="tys-csv-file">Choose a valid csv file:</label>
+                <input name="tys-csv-file" type="file" accept=".csv" />
+                <input type="submit" value='I can haz list' />
             </form>
         </div>
-        <div data-js="tys-list-target">
 
+        <div class="container">
+            <div class="span6">
+                <h2>Code:</h2>
+                <code class='language-markup' data-js="tys-code-target"></code>
+            </div>
+            <div class="span6">
+                <h2>Preview:</h2>
+                <div data-js="tys-div-target"></div>
+            </div>
         </div>
+
         <script id="tys-template-list" type="text/template">
             {{! Template for list - edit below to change the list output
                 see https://github.com/janl/mustache.js for syntax
@@ -61,7 +71,9 @@
         <script src="js/vendor/csv.js"></script>
         <script src="js/vendor/mustache.js"></script>
         <script src="js/plugins.js"></script>
+        <script src="js/vendor/prism.js"></script>
         <script src="js/main.js"></script>
+
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

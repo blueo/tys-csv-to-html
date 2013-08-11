@@ -3,15 +3,15 @@
  *
  */
 /*jslint devel: true, browser: true*/
-/*global jQuery, CSV, Mustache*/
+//the following variables are defined by included .js or the browser
+/*global jQuery, CSV, Mustache, Prism, FileReader*/
 (function ($) {
     "use strict";
     //Take form data and parse csv field created a key/value array for the template
     function processData(data) {
-        var fdata, headers, results, obj, count;
-        data = $(data).serializeArray();
-        fdata = CSV.parse(data[0].value);
-        //Remove header row
+        var fdata, headers, results, obj;
+        fdata = CSV.parse(data);
+        //get header row to create variables for template
         headers = fdata.shift();
         results = [];
         $.each(fdata, function (i, entry) {
@@ -26,18 +26,26 @@
     }
     //create HTML list from array
     function createList(cdata) {
-        var template, html;
+        var template;
         template = $("#tys-template-list").html();
-        html = Mustache.render(template, cdata);
-        $('[data-js="tys-list-target"]').append(html);
+        return Mustache.render(template, cdata);
     }
     //Init
     $(document).ready(function () {
-        var $iform, wholefile, cdata;
+        var $iform, wholefile, cdata, html, reader, content;
+        reader = new FileReader();
         $iform = $('#tys-form');
         $iform.submit(function () {
-            cdata = processData(this);
-            createList(cdata);
+            reader.onloadend = function (e) {
+                content = e.target.result;
+                console.log(content);
+                cdata = processData(content);
+                html = createList(cdata);
+                $('[data-js="tys-code-target"]').text(html);
+                $('[data-js="tys-div-target"]').html(html);
+                Prism.highlightAll();
+            };
+            reader.readAsText(this.elements['tys-csv-file'].files[0]);
             return false;
         });
     });
