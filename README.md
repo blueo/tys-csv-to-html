@@ -20,11 +20,11 @@ The the output will be placed in two sections. The first is a syntax highlighted
 ## Editing or changing the template
 
 To change the output find the template section in `index.html`:
-
+```
 <script id="tys-template-list" type="text/template">
     ... template stuff here with curly braces {{ around things }}...
 </script>
-
+```
 The template is formatted using the [Mustache syntax](https://github.com/janl/mustache.js) and you should refer to that to get an understanding of how it works. But in essence though the items surrounded by `{{}}` are replaced by data from the CSV file.
 
 The script takes the first row from the CSV file and makes them into a variable for the template so you can use any items from that row.
